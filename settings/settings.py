@@ -27,7 +27,8 @@ AUTH_USER_MODEL = 'users.User'
 
 
 ROOT_APPS = [
-    'apps.users'
+    'apps.core',
+    'apps.users',
 ]
 
 INSTALLED_APPS = [

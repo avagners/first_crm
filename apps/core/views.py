@@ -3,7 +3,13 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('Главная страница')
+    template = 'core/index.html'
+    title = 'Первая CRM'
+    context = {
+        'title': title,
+        'text': 'Главная страница'
+    }
+    return render(request, template, context)
 
 
 def customers_list(request):

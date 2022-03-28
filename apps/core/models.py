@@ -10,9 +10,17 @@ class Customer(models.Model):
         max_length=150,
         verbose_name='Фамилия'
     )
-    email = models.EmailField(max_length=254, blank=True, unique=True)
+    email = models.EmailField(
+        max_length=254,
+        blank=True
+    )
     phone_number = models.CharField(
         max_length=15,
         verbose_name='Телефон',
         unique=True
     )
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'

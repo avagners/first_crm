@@ -1,11 +1,39 @@
 {% load static %}
 <header>
     <nav class="navbar navbar-light" style="background-color: lightskyblue">
-      <div class="container">
-        <a class="navbar-brand" href="{% url 'core:index' %}">
-          <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-          <span style="color:red">Первая</span>CRM</a>
-        </a>
-      </div>
-    </nav>      
-  </header>
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'core:index' %}">
+                <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+                <span style="color:red">Первая</span>CRM</a>
+            </a>
+            <ul class="nav nav-pills">
+                {% with request.resolver_match.view_name as view_name %}
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name  == 'core:index' %}active{% endif %}"
+                        href="{% url 'core:index' %}">
+                        Главная
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name  == 'customers:customers_list' %}active{% endif %}"
+                        href="{% url 'customers:customers_list' %}">
+                        Клиенты
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name  == 'orders:orders_list' %}active{% endif %}"
+                        href="{% url 'orders:orders_list' %}">
+                        Заказы
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if view_name  == 'products:products_list' %}active{% endif %}"
+                        href="{% url 'products:products_list' %}">
+                        Услуги
+                    </a>
+                </li>
+                {% endwith %} 
+            </ul>
+        </div>
+    </nav>
+</header>

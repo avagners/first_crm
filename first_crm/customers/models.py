@@ -19,7 +19,7 @@ class Customer(models.Model):
         verbose_name='Телефон',
         unique=True
     )
-    pub_date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата',)
 
     class Meta:
         verbose_name = 'Клиент'

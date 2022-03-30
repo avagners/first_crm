@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def index(request):
@@ -8,8 +7,20 @@ def index(request):
 
 
 def customers_list(request):
-    return HttpResponse('Список клиентов')
+    template = 'customers/customers_list.html'
+    title = 'Список клиентов'
+    context = {
+        'title': title,
+        'text': 'Список клиентов',
+    }
+    return render(request, template, context)
 
 
 def customers_detail(request, pk):
-    return HttpResponse(f'Клиент номер {pk}')
+    template = 'customers/customers_detail.html'
+    title = 'Карточка клиента'
+    context = {
+        'title': title,
+        'text': f'Карточка клиента №{pk}',
+    }
+    return render(request, template, context)

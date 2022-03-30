@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "amazing-grotesk-ultra";
+    src: url('../css/fonts/AmazingGrotesk-Ultra.woff2') format("woff2");
+}
+
+.navbar-light .navbar-brand {
+    font-family: "amazing-grotesk-ultra";
+}
+
+footer p {
+    font-family: "amazing-grotesk-ultra";
+}

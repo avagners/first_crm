@@ -1,11 +1,6 @@
 from django.shortcuts import render
 
 
-def index(request):
-    template = 'customers/index.html'
-    return render(request, template)
-
-
 def customers_list(request):
     template = 'customers/customers_list.html'
     title = 'Список клиентов'

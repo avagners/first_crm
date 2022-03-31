@@ -1,12 +1,14 @@
 from django.shortcuts import render
+from .models import Customer
 
 
 def customers_list(request):
+    customers = Customer.objects.order_by('-pub_date')[:10]
     template = 'customers/customers_list.html'
     title = 'Список клиентов'
     context = {
         'title': title,
-        'text': 'Список клиентов',
+        'customers': customers
     }
     return render(request, template, context)
 

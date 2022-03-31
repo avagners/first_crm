@@ -1,5 +1,8 @@
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from .models import Customer
+from .forms import CustomerForm
 
 
 def customers_list(request):
@@ -21,3 +24,9 @@ def customers_detail(request, pk):
         'text': f'Карточка клиента №{pk}',
     }
     return render(request, template, context)
+
+
+class NewCustomerView(CreateView):
+    form_class = CustomerForm
+    template_name = 'customers/new_customer_form.html'
+    success_url = reverse_lazy('customers:customers_list')

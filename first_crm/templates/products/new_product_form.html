@@ -5,12 +5,17 @@
 {% block content %}
 <div class="container py-5">
     <div class="col">
-        <h1>Добавить новую услугу</h1>
-        <hr>
+        <h1 class="mb-3">Добавить новую услугу</h1>
         <form method="post" action="{% url 'products:new_product' %}">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Добавить">
+            {% load user_filters %}
+            {% for field in form %}
+            <div class="form-floating mb-3">
+                {{ field|addclass:"form-control"}}
+                <label for="{{ field.label }}">{{ field.label }}</label>
+            </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-primary" value="Добавить">
         </form>
     </div>
 </div>

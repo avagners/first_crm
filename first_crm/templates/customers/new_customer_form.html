@@ -5,8 +5,7 @@
 {% block content %}
 <div class="container py-5">
     <div class="col">
-        <h1>Добавить нового клиента</h1>
-        <hr>
+        <h1 class="mb-3">Добавить нового клиента</h1>
         <form method="post" action="{% url 'customers:new_customer' %}">
             {% csrf_token %}
             {% load user_filters %}

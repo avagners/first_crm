@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+Добавить новую услугу
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="col">
+        <h1>Добавить новую услугу</h1>
+        <hr>
+        <form method="post" action="{% url 'products:new_product' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Добавить">
+        </form>
+    </div>
+</div>
+{% endblock %}

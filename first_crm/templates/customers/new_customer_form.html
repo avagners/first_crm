@@ -9,8 +9,14 @@
         <hr>
         <form method="post" action="{% url 'customers:new_customer' %}">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Отправить">
+            {% load user_filters %}
+            {% for field in form %}
+            <div class="form-floating mb-3">
+                {{ field|addclass:"form-control"}}
+                <label for="{{ field.label }}">{{ field.label }}</label>
+            </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-primary" value="Добавить">
         </form>
     </div>
 </div>

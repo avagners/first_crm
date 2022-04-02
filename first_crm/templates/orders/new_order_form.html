@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Новый заказ
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="col">
+        <h1 class="mb-3">Новый заказ</h1>
+        <form method="post" action="{% url 'orders:new_order' %}">
+            {% csrf_token %}
+            {% load user_filters %}
+            {% for field in form %}
+            <div class="form-floating mb-3">
+                {{ field|addclass:"form-control"}}
+                <label for="{{ field.label }}">{{ field.label }}</label>
+            </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-primary" value="Добавить">
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if product %}
+Редактировать карточку услуги
+{% else %}
+Добавить новую услугу
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="col">
+            {% if product %}
+            <h1 class="mb-3">Редактировать карточку услуги</h1>
+            <form method="post" enctype="multipart/form-data" action="{% url 'products:product_edit' product.pk %}">
+            {% else %}
+            <h1 class="mb-3">Добавить новую услугу</h1>
+            <form method="post" enctype="multipart/form-data" action="{% url 'products:new_product' %}">
+            {% endif %}
+            {% csrf_token %}
+            {% load user_filters %}
+            {% for field in form %}
+            <div class="form-floating mb-3">
+                {{ field|addclass:"form-control"}}
+                <label for="{{ field.label }}">{{ field.label }}</label>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">
+                {% if product %}
+                    Сохранить
+                {% else %}
+                    Добавить
+                {% endif %}
+            </button> 
+        </form>
+    </div>
+</div>
+{% endblock %}

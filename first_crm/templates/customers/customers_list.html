@@ -5,30 +5,30 @@
 {% block content %}
 <div class="container py-5">
     <div class="col">
-        <h1>{{ title }}</h1>
+        <h1 class="mb-4">{{ title }}</h1>
         <a class="btn btn-primary" href="{% url 'customers:new_customer' %}" role="button">Добавить клиента</a>
-            <table class="table is-fullwidth table-hover table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Фамилия</th>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Номер телефона</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for customer in customers %}
-                    <tr>
-                        <th scope="row">{{ customer.pk }}</th>
-                        <td>{{ customer.last_name }}</td>
-                        <td>{{ customer.first_name }}</td>
-                        <td>{{ customer.email }}</td>
-                        <td>{{ customer.phone_number }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <table class="table is-fullwidth table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Номер телефона</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <th scope="row">{{ customer.pk }}</th>
+                    <td>{{ customer.last_name }}</td>
+                    <td>{{ customer.first_name }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone_number }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

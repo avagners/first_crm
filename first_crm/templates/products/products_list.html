@@ -3,30 +3,31 @@
 {{ title }}
 {% endblock %}
 {% block content %}
-    <div class="container py-5">
-        <div class="col">
-            <h1>{{ text }}</h1>
-            <a class="btn btn-primary" href="{% url 'products:new_product' %}" role="button">Добавить услугу</a>
-            <table class="table is-fullwidth table-hover table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Наименование</th>
-                        <th scope="col">Цена, руб</th>
-                        <th scope="col">Описание</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in products %}
-                    <tr class="position-relative">
-                        <th scope="row">{{ product.pk }}</th>
-                        <td><a class="stretched-link text-decoration-none text-reset" href="{% url 'products:product_edit' product.pk %}">{{ product.name_product }}</a></td>
-                        <td>{{ product.price }}</td>
-                        <td>{{ product.description }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+<div class="container py-5">
+    <div class="col">
+        <h1 class="mb-4">{{ text }}</h1>
+        <a class="btn btn-primary" href="{% url 'products:new_product' %}" role="button">Добавить услугу</a>
+        <table class="table is-fullwidth table-hover table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Наименование</th>
+                    <th scope="col">Цена, руб</th>
+                    <th scope="col">Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr class="position-relative">
+                    <th scope="row">{{ product.pk }}</th>
+                    <td><a class="stretched-link text-decoration-none text-reset"
+                            href="{% url 'products:product_edit' product.pk %}">{{ product.name_product }}</a></td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
 {% endblock %}

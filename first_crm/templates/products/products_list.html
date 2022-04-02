@@ -18,9 +18,9 @@
                 </thead>
                 <tbody>
                     {% for product in products %}
-                    <tr>
+                    <tr class="position-relative">
                         <th scope="row">{{ product.pk }}</th>
-                        <td>{{ product.name_product }}</td>
+                        <td><a class="stretched-link text-decoration-none text-reset" href="{% url 'products:product_edit' product.pk %}">{{ product.name_product }}</a></td>
                         <td>{{ product.price }}</td>
                         <td>{{ product.description }}</td>
                     </tr>

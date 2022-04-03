@@ -3,6 +3,7 @@ from .models import Order
 from django.urls import reverse_lazy
 from .forms import OrderForm
 from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404, redirect
 
 
 def orders_list(request):
@@ -27,7 +28,23 @@ def orders_detail(request, pk):
     return render(request, template, context)
 
 
+def order_edit(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    form = OrderForm(
+        request.POST or None,
+        files=request.FILES or None,
+        instance=order
+    )
+    if form.is_valid():
+        form.save()
+        return redirect('orders:orders_list')
+    context = {
+        'form': form,
+        'order': order}
+    return render(request, 'orders/order_form.html', context)
+
+
 class NewOrderView(CreateView):
     form_class = OrderForm
-    template_name = 'orders/new_order_form.html'
+    template_name = 'orders/order_form.html'
     success_url = reverse_lazy('orders:orders_list')

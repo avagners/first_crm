@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if order %}
+Редактировать заказ
+{% else %}
+Новый заказ
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="col">
+        {% if order %}
+            <h1 class="mb-4">Редактировать заказ №{{ order.pk }}</h1>
+            <form method="post" enctype="multipart/form-data" action="{% url 'orders:order_edit' order.pk %}">
+            {% else %}
+            <h1 class="mb-4">Новый заказ</h1>
+            <form method="post" enctype="multipart/form-data" action="{% url 'orders:new_order' %}">
+        {% endif %}
+            {% csrf_token %}
+            {% load user_filters %}
+            {% for field in form %}
+            <div class="form-floating mb-3">
+                {{ field|addclass:"form-control"}}
+                <label for="{{ field.label }}">{{ field.label }}</label>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">
+                {% if order %}
+                    Редактировать
+                {% else %}
+                    Добавить
+                {% endif %}
+            </button> 
+        </form>
+    </div>
+</div>
+{% endblock %}

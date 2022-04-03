@@ -1,9 +1,9 @@
-from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.shortcuts import render
-from .models import Customer
+from django.views.generic.edit import CreateView
+
 from .forms import CustomerForm
-from django.shortcuts import get_object_or_404, redirect
+from .models import Customer
 
 
 def customers_list(request):

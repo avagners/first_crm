@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404, redirect
-from .models import Product
+from django.views.generic.edit import CreateView
+
 from .forms import ProductForm
+from .models import Product
 
 
 def products_list(request):

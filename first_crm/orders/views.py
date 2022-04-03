@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from .models import Order
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from .forms import OrderForm
 from django.views.generic.edit import CreateView
-from django.shortcuts import get_object_or_404, redirect
+
+from .forms import OrderForm
+from .models import Order
 
 
 def orders_list(request):

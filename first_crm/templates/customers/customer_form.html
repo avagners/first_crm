@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}
-{% if product %}
-Редактировать карточку
+{% if customer %}
+Редактировать карточку клиента
 {% else %}
-Добавить новую услугу
+Добавить клиента
 {% endif %}
 {% endblock %}
 {% block content %}
 <div class="container py-5">
     <div class="col">
-        {% if product %}
-        <h1 class="mb-4">Редактировать карточку</h1>
-        <form method="post" enctype="multipart/form-data" action="{% url 'products:product_edit' product.pk %}">
+        {% if customer %}
+        <h1 class="mb-4">Редактировать карточку клиента</h1>
+        <form method="post" enctype="multipart/form-data" action="{% url 'customers:customer_edit' customer.pk %}">
             {% else %}
-            <h1 class="mb-4">Добавить новую услугу</h1>
-            <form method="post" enctype="multipart/form-data" action="{% url 'products:new_product' %}">
+            <h1 class="mb-4">Добавить клиента</h1>
+            <form method="post" enctype="multipart/form-data" action="{% url 'customers:new_customer' %}">
                 {% endif %}
                 {% csrf_token %}
                 {% load user_filters %}
@@ -25,7 +25,7 @@
                 </div>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">
-                    {% if product %}
+                    {% if customer %}
                     Редактировать
                     {% else %}
                     Добавить

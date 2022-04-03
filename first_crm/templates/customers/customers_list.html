@@ -19,9 +19,11 @@
             </thead>
             <tbody>
                 {% for customer in customers %}
-                <tr>
+                <tr class="position-relative">
                     <th scope="row">{{ customer.pk }}</th>
-                    <td>{{ customer.last_name }}</td>
+                    <td><a class="stretched-link text-decoration-none text-reset"
+                            href="{% url 'customers:customer_edit' customer.pk %}"
+                            title="Редактировать">{{ customer.last_name }}</a></td>
                     <td>{{ customer.first_name }}</td>
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.phone_number }}</td>

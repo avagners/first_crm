@@ -7,6 +7,38 @@
     <div class="col">
         <h1 class="mb-4">{{ text }}</h1>
         <a class="btn btn-primary" href="{% url 'products:new_product' %}" role="button">Добавить услугу</a>
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Загрузить из CSV
+          </button>
+            
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Загрузка данных их CSV</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Инструкция:</p>
+                  <ol>
+                      <li>Скачайте и заполните <a class="btn-link" href="#" role="button">шаблон</a></li>
+                      <li>Загрузите файл в поле ниже</li>
+                      <li>Нажмите кнопку "Загрузить"</li>
+                  </ol>
+                  <div class="input-group">
+                    <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Загрузить</button>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- Modal -->
+
         <table class="table is-fullwidth table-hover table-sm">
             <thead>
                 <tr>

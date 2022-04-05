@@ -51,7 +51,7 @@
             <tbody>
                 {% for product in products %}
                 <tr class="position-relative">
-                    <th scope="row">{{ product.pk }}</th>
+                    <th scope="row">{{ forloop.counter }}</th>
                     <td><a class="stretched-link text-decoration-none text-reset"
                             href="{% url 'products:product_edit' product.pk %}"
                             title="Редактировать">{{ product.name_product }}</a></td>

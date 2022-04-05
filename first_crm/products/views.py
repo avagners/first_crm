@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.http import HttpResponseRedirect
 
-from .forms import ProductForm
+from .forms import ProductForm, UploadFileForm
 from .models import Product
+import csv
 
 
 def products_list(request):
@@ -49,3 +51,25 @@ class NewProductView(CreateView):
     form_class = ProductForm
     template_name = 'products/product_form.html'
     success_url = reverse_lazy('products:products_list')
+
+
+def handle_uploaded_file(file):
+    decoded_file = file.read().decode('utf-8').splitlines()
+    reader = csv.DictReader(decoded_file)
+    for row in reader:
+        status, created = Product.objects.update_or_create(
+            name_product=row['Наименование услуги'],
+            description=row['Описание'],
+            price=row['Цена']
+        )
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect(reverse_lazy('products:products_list'))
+    else:
+        form = UploadFileForm()
+    return render(request, 'products/upload.html', {'form': form})

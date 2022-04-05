@@ -12,3 +12,7 @@ class ProductForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs.update({'placeholder': field})
+
+
+class UploadFileForm(forms.Form):
+    file = forms.FileField()

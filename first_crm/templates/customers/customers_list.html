@@ -7,6 +7,7 @@
     <div class="col">
         <h1 class="mb-4">{{ title }}</h1>
         <a class="btn btn-primary" href="{% url 'customers:new_customer' %}" role="button">Добавить клиента</a>
+        <a class="btn btn-outline-secondary" href="{% url 'customers:upload_file' %}" role="button">Загрузить из CSV</a>
         <table class="table is-fullwidth table-hover table-sm">
             <thead>
                 <tr>

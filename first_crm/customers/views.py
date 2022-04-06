@@ -1,8 +1,10 @@
+import csv
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.http import HttpResponseRedirect
 
-from .forms import CustomerForm
+from .forms import CustomerForm, UploadFileForm
 from .models import Customer
 
 
@@ -47,3 +49,28 @@ class NewCustomerView(CreateView):
     form_class = CustomerForm
     template_name = 'customers/customer_form.html'
     success_url = reverse_lazy('customers:customers_list')
+
+
+def handle_uploaded_file(file):
+    decoded_file = file.read().decode('utf-8').splitlines()
+    reader = csv.DictReader(decoded_file)
+    for row in reader:
+        status, created = Customer.objects.update_or_create(
+            last_name=row['Фамилия'],
+            first_name=row['Имя'],
+            email=row['email'],
+            phone_number=row['Телефон']
+        )
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return HttpResponseRedirect(
+                reverse_lazy('customers:customers_list')
+            )
+    else:
+        form = UploadFileForm()
+    return render(request, 'customers/upload.html', {'form': form})

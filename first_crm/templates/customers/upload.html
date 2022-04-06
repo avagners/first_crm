@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Загрузка данных из файла
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="container py-5">
+    <div class="col">
+        <h1 class="mb-4">Загрузка данных из CSV</h1>
+        <h5>Инструкция:</h5>
+        <ol>
+            <li>Скачайте и заполните <a href="{% static 'data/customers.csv' %}" role="button">шаблон</a></li>
+            <li>Загрузите ваш файл в форму ниже</li>
+            <li>Нажмите кнопку "Загрузить"</li>
+        </ol>
+            <form method="post" enctype="multipart/form-data" action="{% url 'customers:upload_file' %}">
+                {% csrf_token %}
+                {% load user_filters %}
+                {% for field in form %}
+                <div>
+                    {{ field|addclass:"form-control"}}
+                    <label for="{{ field.label }}"></label>
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">
+                    Загрузить
+                </button>
+            </form>
+    </div>
+</div>
+{% endblock %}

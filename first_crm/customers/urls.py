@@ -11,4 +11,5 @@ urlpatterns = [
     path('new_customer/', views.NewCustomerView.as_view(),
          name='new_customer'),
     path('<int:pk>/edit/', views.customer_edit, name='customer_edit'),
+    path('upload_file/', views.upload_file, name='upload_file'),
 ]

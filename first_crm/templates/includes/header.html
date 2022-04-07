@@ -32,6 +32,16 @@
                         Услуги
                     </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if view_name  == 'about:author' or view_name  == 'about:tech' %}active{% endif %}" 
+                       href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      О проекте
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="{% url 'about:author' %}">Об авторе</a></li>
+                      <li><a class="dropdown-item" href="{% url 'about:tech' %}">Технологии</a></li>
+                    </ul>
+                  </li>
                 {% endwith %} 
             </ul>
         </div>

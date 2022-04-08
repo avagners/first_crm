@@ -3,18 +3,22 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 
 from .forms import CustomerForm, UploadFileForm
 from .models import Customer
 
 
 def customers_list(request):
-    customers = Customer.objects.order_by('-pub_date')[:10]
+    customers = Customer.objects.order_by('-pub_date')
+    paginator = Paginator(customers, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     template = 'customers/customers_list.html'
     title = 'Список клиентов'
     context = {
         'title': title,
-        'customers': customers
+        'page_obj': page_obj,
     }
     return render(request, template, context)
 

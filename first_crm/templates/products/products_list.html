@@ -21,7 +21,7 @@
             <tbody>
                 {% for product in page_obj %}
                 <tr class="position-relative">
-                    <th scope="row">{{ forloop.counter }}</th>
+                    <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
                     <td><a class="stretched-link text-decoration-none text-reset"
                             href="{% url 'products:product_edit' product.pk %}"
                             title="Редактировать">{{ product.name_product }}</a></td>

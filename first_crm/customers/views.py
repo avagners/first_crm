@@ -9,11 +9,16 @@ from .forms import CustomerForm, UploadFileForm
 from .models import Customer
 
 
-def customers_list(request):
-    customers = Customer.objects.order_by('-pub_date')
+def paginate(request, customers):
     paginator = Paginator(customers, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    return page_obj
+
+
+def customers_list(request):
+    customers = Customer.objects.order_by('-pub_date')
+    page_obj = paginate(request, customers)
     template = 'customers/customers_list.html'
     title = 'Список клиентов'
     context = {

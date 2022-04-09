@@ -1,19 +1,28 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.core.paginator import Paginator
 
 from .forms import OrderForm
 from .models import Order
+
+
+def paginate(request, orders):
+    paginator = Paginator(orders, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
 
 
 def orders_list(request):
     template = 'orders/orders_list.html'
     title = 'Список заказов'
     orders = Order.objects.order_by('-pay_date')
+    page_obj = paginate(request, orders)
     context = {
         'title': title,
         'text': 'Заказы',
-        'orders': orders
+        'page_obj': page_obj
     }
     return render(request, template, context)
 

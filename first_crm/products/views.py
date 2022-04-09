@@ -2,20 +2,29 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 
 from .forms import ProductForm, UploadFileForm
 from .models import Product
 import csv
 
 
+def paginate(request, products):
+    paginator = Paginator(products, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return page_obj
+
+
 def products_list(request):
     template = 'products/products_list.html'
     title = 'Список услуг'
     products = Product.objects.all()
+    page_obj = paginate(request, products)
     context = {
         'title': title,
         'text': 'Услуги',
-        'products': products
+        'page_obj': page_obj
     }
     return render(request, template, context)
 

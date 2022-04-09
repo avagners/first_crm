@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for product in products %}
+                {% for product in page_obj %}
                 <tr class="position-relative">
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><a class="stretched-link text-decoration-none text-reset"
@@ -31,7 +31,9 @@
                 {% endfor %}
             </tbody>
         </table>
-
+    </div>
+    <div class="col d-flex justify-content-center">
+        {% include 'includes/paginator.html' %}
     </div>
 </div>
 {% endblock %}

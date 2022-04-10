@@ -29,6 +29,10 @@ Cоздать и активировать виртуальное окружен�
     python3 manage.py makemigrations
     python3 manage.py migrate
 
+Выполнить загрузку тестовых данных:
+
+    python3 manage.py import_csv
+
 В папке с файлом manage.py выполните команду:
 
     python3 manage.py runserver

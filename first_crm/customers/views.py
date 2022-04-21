@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
 
 from .forms import CustomerForm, UploadFileForm
 from .models import Customer
@@ -17,6 +18,7 @@ def paginate(request, customers):
     return page_obj
 
 
+@login_required
 def customers_list(request):
     customers = Customer.objects.order_by('-pub_date')
     page_obj = paginate(request, customers)
@@ -29,6 +31,7 @@ def customers_list(request):
     return render(request, template, context)
 
 
+@login_required
 def customers_detail(request, pk):
     template = 'customers/customers_detail.html'
     title = 'Карточка клиента'
@@ -39,6 +42,7 @@ def customers_detail(request, pk):
     return render(request, template, context)
 
 
+@login_required
 def customer_edit(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     form = CustomerForm(

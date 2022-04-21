@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
 
 from .forms import ProductForm, UploadFileForm
 from .models import Product
@@ -17,6 +18,7 @@ def paginate(request, products):
     return page_obj
 
 
+@login_required
 def products_list(request):
     template = 'products/products_list.html'
     title = 'Список услуг'
@@ -30,6 +32,7 @@ def products_list(request):
     return render(request, template, context)
 
 
+@login_required
 def products_detail(request, pk):
     template = 'products/products_detail.html'
     product = Product.objects.get(pk=pk)
@@ -41,6 +44,7 @@ def products_detail(request, pk):
     return render(request, template, context)
 
 
+@login_required
 def product_edit(request, pk):
     product = get_object_or_404(Product, pk=pk)
     form = ProductForm(

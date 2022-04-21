@@ -2,6 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
 
 from .forms import OrderForm
 from .models import Order
@@ -14,6 +15,7 @@ def paginate(request, orders):
     return page_obj
 
 
+@login_required
 def orders_list(request):
     template = 'orders/orders_list.html'
     title = 'Список заказов'
@@ -27,6 +29,7 @@ def orders_list(request):
     return render(request, template, context)
 
 
+@login_required
 def orders_detail(request, pk):
     template = 'orders/orders_detail.html'
     title = 'Карточка заказа'
@@ -37,6 +40,7 @@ def orders_detail(request, pk):
     return render(request, template, context)
 
 
+@login_required
 def order_edit(request, pk):
     order = get_object_or_404(Order, pk=pk)
     form = OrderForm(
@@ -49,7 +53,8 @@ def order_edit(request, pk):
         return redirect('orders:orders_list')
     context = {
         'form': form,
-        'order': order}
+        'order': order
+    }
     return render(request, 'orders/order_form.html', context)
 
 

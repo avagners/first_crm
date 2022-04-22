@@ -11,9 +11,9 @@
         <table class="table is-fullwidth table-hover table-sm">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Фамилия</th>
-                    <th scope="col">Имя</th>
+                    <th scope="col"><a href="{% url 'customers:customers_list' %}?sort=id">#</a></th>
+                    <th scope="col"><a href="{% url 'customers:customers_list' %}?sort=last_name">Фамилия</a></th>
+                    <th scope="col"><a href="{% url 'customers:customers_list' %}?sort=first_name">Имя</a></th>
                     <th scope="col">Email</th>
                     <th scope="col">Номер телефона</th>
                 </tr>

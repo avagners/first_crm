@@ -20,7 +20,11 @@ def paginate(request, customers):
 
 @login_required
 def customers_list(request):
-    customers = Customer.objects.order_by('-pub_date')
+    sort = request.GET.getlist('sort')
+    if sort:
+        customers = Customer.objects.get_queryset().order_by(*sort)
+    else:
+        customers = Customer.objects.all()
     page_obj = paginate(request, customers)
     template = 'customers/customers_list.html'
     title = 'Список клиентов'

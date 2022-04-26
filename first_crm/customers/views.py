@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import CustomerForm, UploadFileForm
 from .models import Customer
+from orders.models import Order
 
 
 def paginate(request, customers):
@@ -37,11 +38,15 @@ def customers_list(request):
 
 @login_required
 def customers_detail(request, pk):
+    customer = Customer.objects.get(pk=pk)
+    order_history = Order.objects.filter(customer=customer)
     template = 'customers/customers_detail.html'
     title = 'Карточка клиента'
     context = {
         'title': title,
         'text': f'Карточка клиента №{pk}',
+        'customer': customer,
+        'order_history': order_history
     }
     return render(request, template, context)
 

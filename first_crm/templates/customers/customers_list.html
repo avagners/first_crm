@@ -23,7 +23,7 @@
                 <tr class="position-relative">
                     <th scope="row">{{ customer.pk }}</th>
                     <td><a class="stretched-link text-decoration-none text-reset"
-                            href="{% url 'customers:customer_edit' customer.pk %}"
+                            href="{% url 'customers:customers_detail' customer.pk %}"
                             title="Редактировать">{{ customer.last_name }}</a></td>
                     <td>{{ customer.first_name }}</td>
                     <td>{{ customer.email }}</td>

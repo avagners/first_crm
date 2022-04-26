@@ -3,9 +3,58 @@
 {{ title }}
 {% endblock %}
 {% block content %}
-    <div class="container py-5">
-        <div class="col">
-            <h1>{{ text }}</h1>
+<div class="container py-5">
+    <h1>{{ text }}</h1>
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 mt-3 card">
+            <div class="card-body">
+                <h2 class="card-title">{{ customer.last_name }} {{ customer.first_name }}</h2>
+                <h6 class="card-subtitle mb-2 text-muted">Контакты</h6>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ customer.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Телефон:</td>
+                            <td>{{ customer.phone_number }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-body">
+                <a href="{% url 'customers:customer_edit' customer.pk %}" class="btn btn-primary">Редактировать</a>
+            </div>
         </div>
     </div>
+        <div class="col card mt-3">
+            <div class="card-body">
+                <h4>История заказов:</h4>
+                <table class="table is-fullwidth table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Услуга</th>
+                            <th scope="col">Стоимость</th>
+                            <th scope="col">Комментарии</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in order_history %}
+                        <tr class="position-relative">
+                            <td><a class="stretched-link text-decoration-none text-reset"
+                                href="{% url 'orders:order_edit' order.pk %}"
+                                title="Редактировать">{{ order.pay_date }}</a></td>
+                            <td>{{ order.product }}</td>
+                            <td>{{ order.total_cost }}</td>
+                            <td>{{ order.comments }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

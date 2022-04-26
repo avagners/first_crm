@@ -8,6 +8,7 @@
             </a>
             <ul class="nav nav-pills">
                 {% with request.resolver_match.view_name as view_name %}
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link {% if view_name  == 'core:index' %}active{% endif %}"
                         href="{% url 'core:index' %}">
@@ -32,6 +33,17 @@
                         Услуги
                     </a>
                 </li>
+                <li class="nav-item nav-link">
+                    Пользователь: {{ user.username }}
+                <li>
+                <li class="nav-item"> 
+                    <a class="nav-link link-light {% if view_name  == 'users:logout' %}active{% endif %}"
+                        href="{% url 'users:logout' %}">
+                        Выйти
+                    </a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated == False %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if view_name  == 'about:author' or view_name  == 'about:tech' %}active{% endif %}" 
                        href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,7 +53,8 @@
                       <li><a class="dropdown-item" href="{% url 'about:author' %}">Об авторе</a></li>
                       <li><a class="dropdown-item" href="{% url 'about:tech' %}">Технологии</a></li>
                     </ul>
-                  </li>
+                </li>
+                {% endif %}
                 {% endwith %} 
             </ul>
         </div>

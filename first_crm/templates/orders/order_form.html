@@ -20,16 +20,17 @@
                 {% load user_filters %}
                 {% for field in form %}
 
+                <div class="form-floating mb-3">
+                    {{ field|addclass:"form-control"}}
+                    <label for="{{ field.label }}">{{ field.label }}</label>
+                </div>
+
                 {% for error in field.errors %}
                 <div class="alert alert-danger">
                     {{ field.label }}: {{ error|escape }}
                 </div>
                 {% endfor %}
-
-                <div class="form-floating mb-3">
-                    {{ field|addclass:"form-control"}}
-                    <label for="{{ field.label }}">{{ field.label }}</label>
-                </div>
+                
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">
                     {% if order %}

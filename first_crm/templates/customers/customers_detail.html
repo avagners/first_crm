@@ -6,9 +6,15 @@
 <div class="container py-5">
     <h1>{{ text }}</h1>
     <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-8 mt-3 card">
+        <div class="col-xl-6 col-lg-6 col-md-8 mt-3 card shadow-sm p-3 bg-body rounded mr-8">
             <div class="card-body">
-                <h2 class="card-title">{{ customer.last_name }} {{ customer.first_name }}</h2>
+                <h2 class="card-title position-relative">{{ customer.last_name }} {{ customer.first_name }}
+                    {% if customer.status  %}
+                    <span class="badge bg-success position-absolute top-50 start-100 translate-middle shadow">Активный</span>
+                    {% else %}
+                    <span class="badge bg-danger position-absolute top-50 start-100 translate-middle">Неактивный</span>
+                    {% endif %}
+                </h2>
                 <h6 class="card-subtitle mb-2 text-muted">Контакты</h6>
                 <table class="table">
                     <tbody>
@@ -29,7 +35,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col card mt-3">
+        <div class="col card mt-3 shadow-sm">
             <div class="card-body">
                 <h4>История заказов:</h4>
                 <table class="table is-fullwidth table-hover table-sm">

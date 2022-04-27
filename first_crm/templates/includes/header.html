@@ -16,19 +16,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if view_name  == 'customers:customers_list' %}active{% endif %}"
+                    <a class="nav-link {% if view_name in 'customers:customers_list, customers:customers_detail, customers:customer_edit' %}active{% endif %}"
                         href="{% url 'customers:customers_list' %}">
                         Клиенты
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if view_name  == 'orders:orders_list' %}active{% endif %}"
+                    <a class="nav-link {% if view_name in 'orders:orders_list, orders:order_edit' %}active{% endif %}"
                         href="{% url 'orders:orders_list' %}">
                         Заказы
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if view_name  == 'products:products_list' %}active{% endif %}"
+                    <a class="nav-link {% if view_name in 'products:products_list, products:product_edit' %}active{% endif %}"
                         href="{% url 'products:products_list' %}">
                         Услуги
                     </a>

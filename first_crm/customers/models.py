@@ -15,12 +15,12 @@ class Customer(models.Model):
         blank=True
     )
     phone_number = models.CharField(
-        max_length=15,
+        max_length=16,
         verbose_name='Телефон',
         unique=True
     )
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата',)
-    status = models.BooleanField(auto_created=True, verbose_name='Статус')
+    status = models.BooleanField(default=True, verbose_name='Статус')
 
     class Meta:
         verbose_name = 'Клиент'

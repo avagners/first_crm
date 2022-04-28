@@ -4,3 +4,8 @@ venv
 db.sqlite3
 __pycache__
 .env
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover

@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 
 from .forms import CustomerForm, UploadFileForm
@@ -68,10 +67,13 @@ def customer_edit(request, pk):
     return render(request, 'customers/customer_form.html', context)
 
 
-class NewCustomerView(CreateView):
-    form_class = CustomerForm
-    template_name = 'customers/customer_form.html'
-    success_url = reverse_lazy('customers:customers_list')
+@login_required
+def customer_create(request):
+    form = CustomerForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('customers:customers_list')
+    return render(request, 'customers/customer_form.html', {'form': form})
 
 
 def handle_uploaded_file(file):

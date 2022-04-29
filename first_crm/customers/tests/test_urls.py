@@ -56,7 +56,9 @@ class CustomersURLTests(TestCase):
                 'customers:customer_edit', args=[self.customer.pk]
             ),
             '/customers/new_customer/': reverse('users:login') + '?next='
-            + reverse('customers:new_customer')
+            + reverse('customers:new_customer'),
+            '/customers/upload_file/': reverse('users:login') + '?next='
+            + reverse('customers:upload_file'),
         }
         for url, redirect in dict_url_redirect.items():
             with self.subTest(url=url):

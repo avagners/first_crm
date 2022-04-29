@@ -88,6 +88,7 @@ def handle_uploaded_file(file):
         )
 
 
+@login_required
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)

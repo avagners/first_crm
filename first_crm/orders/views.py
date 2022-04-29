@@ -1,7 +1,5 @@
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 
 from .forms import OrderForm
@@ -58,7 +56,10 @@ def order_edit(request, pk):
     return render(request, 'orders/order_form.html', context)
 
 
-class NewOrderView(CreateView):
-    form_class = OrderForm
-    template_name = 'orders/order_form.html'
-    success_url = reverse_lazy('orders:orders_list')
+@login_required
+def order_create(request):
+    form = OrderForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('orders:orders_list')
+    return render(request, 'orders/order_form.html', {'form': form})
